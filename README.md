@@ -36,9 +36,5 @@ opening a browser or navigating to a URL.
 2) ```cd testapi ```
 3) Open views.py in folder testapi.
 4) ```python manage.py runserver```
-Note:- API is now running at localhost:8000
+Note:- API is now running at localhost http://127.0.0.1:8000/testai/tests/v1/execute and to run tests goto localhost:8000/
 
-5) In the terminal section open command prompt in vs code.
-6) ```cd tests/hdn```
-7) In command prompt Type
-```python update_test.py```
