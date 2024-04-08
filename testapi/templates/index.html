@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results</title>
+</head>
+<body>
+    <h1>Test Results</h1>
+    <h2>Status: <span id="test-status">Loading</span></h2>
+    <details>
+        <summary>Complete Log</summary>
+        <div id="test-results"></div>
+    </details>
+
+    <script>
+        // Fetch test results from the API endpoint
+        fetch("/testai/tests/v1/execute", {
+  method: "POST",
+    headers: {
+    "Content-type": "application/json; charset=UTF-8"
+  }
+}).then(response=> response.json()).then(resdata=>{
+    
+        fetch('', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"tests":[{"title":"Open google.com","steps":["Open Browser    browser=chrome","Go To    url=https://google.com"]}]})
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Display test results on the webpage
+            const testResultsElement = document.getElementById('test-results');
+            testResultsElement.innerHTML = '<h2>Test Results:</h2>';
+            if(data.results.robot.errors===null){document.getElementById('test-status').innerHTML='Passed';}else{document.getElementById('test-status').innerHTML='Failed';}
+            console.log(data.results.robot.errors);
+            testResultsElement.innerHTML += `<p>${JSON.stringify(data.results)}</p>`;
+            // console.log(data.results);
+            
+        })
+        .catch(error => {
+            console.error('Error fetching test results:', error);
+            const testResultsElement = document.getElementById('test-results');
+            testResultsElement.innerHTML = '<p>Error fetching test results. Please try again later.</p>';
+        });
+});
+        
+    </script>
+</body>
+</html>

@@ -19,6 +19,6 @@ from django.urls import path
 from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index),
+    path('',views.TestExecutionView.as_view()),
     path('testai/tests/v1/execute',views.tests)
 ]
